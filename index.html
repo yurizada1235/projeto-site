@@ -41,19 +41,44 @@
                 <button type="button" class="answer" data-correct="false">Bambu</button>
             </div>
         </form>
+        <div id="result" class="result" style="display: none;"></div>
     </div>
     <script>
-        const answers = document.querySelectorAll('.answer');
-        
-        answers.forEach(answer => {
-            answer.addEventListener('click', function() {
-                const correct = this.dataset.correct === 'true';
-                this.classList.add(correct ? 'correct' : 'wrong');
-                setTimeout(() => {
-                    this.classList.remove('correct', 'wrong');
-                }, 1000);
+        const questions = document.querySelectorAll('.question');
+        let score = 0;
+        let totalQuestions = questions.length;
+
+        questions.forEach(question => {
+            const answers = question.querySelectorAll('.answer');
+            answers.forEach(answer => {
+                answer.addEventListener('click', function() {
+                    const correct = this.dataset.correct === 'true';
+                    if (correct) {
+                        score++;
+                    }
+                    
+                    // Marcar a resposta escolhida
+                    this.classList.add(correct ? 'correct' : 'wrong');
+
+                    // Desabilitar todas as respostas desta pergunta
+                    answers.forEach(btn => btn.disabled = true);
+
+                    // Verificar se todas as perguntas foram respondidas
+                    if (Array.from(questions).every(q => Array.from(q.querySelectorAll('.answer')).some(a => a.disabled))) {
+                        setTimeout(showResult, 1000);
+                    }
+                });
             });
         });
+
+        function showResult() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `<h2>Resultado do Quiz</h2>
+                                   <p>Você acertou ${score} de ${totalQuestions} perguntas.</p>
+                                   <p>Você errou ${totalQuestions - score} perguntas.</p>`;
+        }
     </script>
 </body>
 </html>
+
