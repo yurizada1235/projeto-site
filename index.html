@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Natureza e Robótica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz sobre Natureza e Robótica</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <p>1. Qual é o maior mamífero do mundo?</p>
+                <button type="button" class="answer" data-correct="true">Baleia Azul</button>
+                <button type="button" class="answer" data-correct="false">Elefante</button>
+                <button type="button" class="answer" data-correct="false">Girafa</button>
+            </div>
+            <div class="question">
+                <p>2. O que é um robô?</p>
+                <button type="button" class="answer" data-correct="true">Uma máquina programável</button>
+                <button type="button" class="answer" data-correct="false">Um animal de estimação</button>
+                <button type="button" class="answer" data-correct="false">Um computador</button>
+            </div>
+            <div class="question">
+                <p>3. Qual é o maior deserto do mundo?</p>
+                <button type="button" class="answer" data-correct="false">Deserto do Saara</button>
+                <button type="button" class="answer" data-correct="true">Antártida</button>
+                <button type="button" class="answer" data-correct="false">Deserto de Gobi</button>
+            </div>
+            <div class="question">
+                <p>4. Qual é a função de um sensor em robótica?</p>
+                <button type="button" class="answer" data-correct="true">Detectar informações do ambiente</button>
+                <button type="button" class="answer" data-correct="false">Armazenar dados</button>
+                <button type="button" class="answer" data-correct="false">Imprimir documentos</button>
+            </div>
+            <div class="question">
+                <p>5. Qual é a planta mais alta do mundo?</p>
+                <button type="button" class="answer" data-correct="true">Sequoia</button>
+                <button type="button" class="answer" data-correct="false">Pine</button>
+                <button type="button" class="answer" data-correct="false">Bambu</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        const answers = document.querySelectorAll('.answer');
+        
+        answers.forEach(answer => {
+            answer.addEventListener('click', function() {
+                const correct = this.dataset.correct === 'true';
+                this.classList.add(correct ? 'correct' : 'wrong');
+                setTimeout(() => {
+                    this.classList.remove('correct', 'wrong');
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
